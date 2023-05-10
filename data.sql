@@ -55,7 +55,7 @@ CREATE TABLE "drawing" (
   "id" BIGSERIAL NOT NULL PRIMARY   KEY,
   "designation" varchar(255) NOT NULL,
   "name" text NOT NULL,
-  "version" varchar(10) NOT NULL,
+  "version" BIGSERIAL NOT NULL,
   "date" varchar(20) NOT NULL,
   imageURL text
 );
@@ -64,19 +64,19 @@ INSERT INTO "drawing" (designation,name,version,date,imageURL)
 VALUES 
 ('2311194СБ', 
 'Сборочный чертеж',
-'1',
+1,
 '25.04.2023 23:49:44', 
 'https://www.teslarati.com/wp-content/uploads/2020/11/Sentinel-6A-Falcon-9-B1063-SLC-4E-112120-SpaceX-launch-landing-2-c-2048x1127.jpg'),
 
 ('2340208', 
 'Ступенька',
-'1',
+1,
 '24.04.2023 11:34:15', 
 'https://estestvoznanye.ru/sites/default/files/izo/motokross-2.jpg'),
 
 ('2340388', 
 'Скоба',
-'1',
+1,
 '23.04.2023 16:27:43', 
 'https://adonius.club/uploads/posts/2022-08/1661514983_18-adonius-club-p-severnii-tigr-zhivotnie-krasivo-foto-25.jpg');
 
