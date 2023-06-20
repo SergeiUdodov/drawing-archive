@@ -1,0 +1,38 @@
+version: '3'
+services:
+  postgres:
+    container_name: postgres
+    image: postgres:latest
+    ports:
+      - "5431:5432"
+    restart: always
+    volumes:
+      #- pgdata:/var/lib/postgresql/data/
+      - ./data.sql:/docker-entrypoint-initdb.d/data.sql
+    environment:
+      - POSTGRES_DB=drawing-archive-db
+      - POSTGRES_USER=nic
+      - POSTGRES_PASSWORD=nic
+  backend:
+    container_name: backend
+    build: ./drawing-archive-back-spring
+    ports:
+      - "8080:8080"
+    restart: always
+    depends_on:
+      - postgres
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/drawing-archive-db
+      SPRING_DATASOURCE_USERNAME: nic
+      SPRING_DATASOURCE_PASSWORD: nic
+      SPRING_CORS_ALLOWED_ORIGINS: '*'
+  frontend:
+    container_name: frontend
+    build: ./drawing-archive-front-vue
+    ports:
+      - "8081:8081"
+    restart: always
+    depends_on:
+      - backend
+volumes:
+  pgdata:
